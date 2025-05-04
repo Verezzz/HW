@@ -1,3 +1,5 @@
+import json
+
 with open("alice.txt", "r", encoding="utf-8") as file:
     text = file.read()
 
@@ -11,8 +13,6 @@ for znak in text:
         znak_count[znak] = 1
 
 znak_count = dict(sorted(znak_count.items()))
-
-import json
 
 with open("hw01_output.json", "w", encoding="utf-8") as output_file:
     json.dump(znak_count, output_file, ensure_ascii=False, indent=4)
