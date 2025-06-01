@@ -14,37 +14,36 @@ with open(input_file, "r", encoding="utf-8") as file:
         movie_name = line["PRIMARYTITLE"].strip()
 
         if line["DIRECTOR"].strip() != "":
-            drctrs = line["DIRECTOR"].split(",")
-            drctrs = [name.strip() for name in drctrs]
+            directors = line["DIRECTOR"].split(",")
+            directors = [name.strip() for name in directors]
         else:
-            drctrs = []
+            directors = []
 
         if line["CAST"].strip() != "":
-            ctrs = line["CAST"].split(",")
-            ctrs = [name.strip() for name in ctrs]
+            actors = line["CAST"].split(",")
+            actors = [name.strip() for name in actors]
         else:
-            ctrs = []
+            actors = []
 
-        gnrs = line["GENRES"].split(",")
-        gnrs = [gnr.strip() for gnr in gnrs]
+        genres = line["GENRES"].split(",")
+        genres = [gnr.strip() for gnr in genres]
 
-        yrs = line["STARTYEAR"].strip()
-        if yrs.isdigit():
-            yr = int(yrs)
-            dcd = (yr // 10) * 10
+        start_year = line["STARTYEAR"].strip()
+        if start_year.isdigit():
+            year = int(start_year)
+            decade = (year // 10) * 10
         else:
             continue
-
         
-        mv = {
+        movie = {
             "title": movie_name,
-            "directors": drctrs,
-            "cast": ctrs,
-            "genres": gnrs,
-            "decade": dcd
+            "directors": directors,
+            "cast": actors,
+            "genres": genres,
+            "decade": decade
         }
 
-        outcome.append(mv)
+        outcome.append(movie)
 
 with open(output_file, "w", encoding="utf-8") as output:
     json.dump(outcome, output, ensure_ascii=False, indent=2)
